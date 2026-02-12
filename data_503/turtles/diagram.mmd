@@ -1,0 +1,84 @@
+erDiagram
+    submitters ||--o{ submissions : "submits"
+    submissions ||--o{ observations : "contains"
+    submissions ||--o{ submission_status_history : "has"
+    submissions }o--|| locations : "occurs_at"
+    submissions }o--|| action_taken_lookup : "action"
+    observations }o--|| species_lookup : "identifies"
+    observations }o--|| behavior_lookup : "exhibits"
+    submission_status_history }o--|| status_lookup : "has_status"
+
+    submitters {
+        int submitter_id PK
+        string first_name
+        string last_name
+        string email UK
+        string phone_number
+    }
+
+    submissions {
+        int submission_id PK
+        uuid submission_uuid UK
+        int submitter_id FK
+        timestamp submission_timestamp
+        timestamp observation_timestamp
+        int location_id FK
+        decimal latitude
+        decimal longitude
+        int action_taken_id FK
+        boolean id_tool_used
+        text observation_notes
+    }
+
+    observations {
+        int observation_id PK
+        int submission_id FK
+        int species_id FK
+        int behavior_id FK
+        int number_of_turtles
+        text species_sighting_notes
+    }
+
+    submission_status_history {
+        int status_history_id PK
+        int submission_id FK
+        int status_id FK
+        text admin_notes
+        string changed_by
+        timestamp changed_at
+    }
+
+    species_lookup {
+        int species_id PK
+        string species_code UK
+        string common_name
+        string scientific_name
+        boolean is_invasive
+    }
+
+    behavior_lookup {
+        int behavior_id PK
+        string behavior_code UK
+        string behavior_description
+    }
+
+    action_taken_lookup {
+        int action_taken_id PK
+        string action_code UK
+        string action_description
+    }
+
+    status_lookup {
+        int status_id PK
+        string status_code UK
+        string status_description
+        int display_order
+    }
+
+    locations {
+        int location_id PK
+        string location_name
+        string location_type
+        geography geom
+        string county
+    }
