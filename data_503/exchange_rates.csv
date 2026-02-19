@@ -1,0 +1,241 @@
+rate_date,currency_code,currency_name,exchange_rate,is_major
+2025-01-01,USD,US Dollar,1.000000,true
+2025-01-01,EUR,Euro,0.9656,true
+2025-01-01,GBP,British Pound,0.8050,true
+2025-01-01,JPY,Japanese Yen,157.32,true
+2025-01-01,CAD,Canadian Dollar,1.4385,true
+2025-01-01,AUD,Australian Dollar,1.6095,true
+2025-01-01,CHF,Swiss Franc,0.9065,true
+2025-01-01,INR,Indian Rupee,85.65,true
+2025-01-01,BRL,Brazilian Real,6.18,false
+2025-01-01,PLN,Polish Zloty,4.10,false
+2025-01-01,SEK,Swedish Krona,11.02,false
+2025-01-01,MXN,Mexican Peso,20.45,false
+2025-01-01,SGD,Singapore Dollar,1.3620,false
+2025-01-01,ILS,Israeli Shekel,3.65,false
+2025-01-01,UAH,Ukrainian Hryvnia,41.85,false
+2025-01-01,ARS,Argentine Peso,1025.50,false
+2025-01-01,CNY,Chinese Yuan,7.30,false
+2025-01-01,KRW,South Korean Won,1470.25,false
+2025-01-01,NZD,New Zealand Dollar,1.7720,false
+2025-01-01,ZAR,South African Rand,18.82,false
+2025-02-01,USD,US Dollar,1.000000,true
+2025-02-01,EUR,Euro,0.9729,true
+2025-02-01,GBP,British Pound,0.8125,true
+2025-02-01,JPY,Japanese Yen,155.18,true
+2025-02-01,CAD,Canadian Dollar,1.4520,true
+2025-02-01,AUD,Australian Dollar,1.6245,true
+2025-02-01,CHF,Swiss Franc,0.9125,true
+2025-02-01,INR,Indian Rupee,86.12,true
+2025-02-01,BRL,Brazilian Real,5.95,false
+2025-02-01,PLN,Polish Zloty,4.05,false
+2025-02-01,SEK,Swedish Krona,10.92,false
+2025-02-01,MXN,Mexican Peso,20.62,false
+2025-02-01,SGD,Singapore Dollar,1.3580,false
+2025-02-01,ILS,Israeli Shekel,3.62,false
+2025-02-01,UAH,Ukrainian Hryvnia,42.15,false
+2025-02-01,ARS,Argentine Peso,1058.75,false
+2025-02-01,CNY,Chinese Yuan,7.28,false
+2025-02-01,KRW,South Korean Won,1458.50,false
+2025-02-01,NZD,New Zealand Dollar,1.7850,false
+2025-02-01,ZAR,South African Rand,18.65,false
+2025-03-01,USD,US Dollar,1.000000,true
+2025-03-01,EUR,Euro,0.9620,true
+2025-03-01,GBP,British Pound,0.7945,true
+2025-03-01,JPY,Japanese Yen,150.42,true
+2025-03-01,CAD,Canadian Dollar,1.4385,true
+2025-03-01,AUD,Australian Dollar,1.5892,true
+2025-03-01,CHF,Swiss Franc,0.8985,true
+2025-03-01,INR,Indian Rupee,84.75,true
+2025-03-01,BRL,Brazilian Real,5.78,false
+2025-03-01,PLN,Polish Zloty,3.98,false
+2025-03-01,SEK,Swedish Krona,10.65,false
+2025-03-01,MXN,Mexican Peso,20.18,false
+2025-03-01,SGD,Singapore Dollar,1.3485,false
+2025-03-01,ILS,Israeli Shekel,3.58,false
+2025-03-01,UAH,Ukrainian Hryvnia,41.92,false
+2025-03-01,ARS,Argentine Peso,1095.25,false
+2025-03-01,CNY,Chinese Yuan,7.24,false
+2025-03-01,KRW,South Korean Won,1442.75,false
+2025-03-01,NZD,New Zealand Dollar,1.7625,false
+2025-03-01,ZAR,South African Rand,18.35,false
+2025-04-01,USD,US Dollar,1.000000,true
+2025-04-01,EUR,Euro,0.9267,true
+2025-04-01,GBP,British Pound,0.7741,true
+2025-04-01,JPY,Japanese Yen,149.85,true
+2025-04-01,CAD,Canadian Dollar,1.4298,true
+2025-04-01,AUD,Australian Dollar,1.5645,true
+2025-04-01,CHF,Swiss Franc,0.8825,true
+2025-04-01,INR,Indian Rupee,85.42,true
+2025-04-01,BRL,Brazilian Real,5.68,false
+2025-04-01,PLN,Polish Zloty,3.92,false
+2025-04-01,SEK,Swedish Krona,10.42,false
+2025-04-01,MXN,Mexican Peso,19.95,false
+2025-04-01,SGD,Singapore Dollar,1.3420,false
+2025-04-01,ILS,Israeli Shekel,3.72,false
+2025-04-01,UAH,Ukrainian Hryvnia,41.58,false
+2025-04-01,ARS,Argentine Peso,1132.50,false
+2025-04-01,CNY,Chinese Yuan,7.26,false
+2025-04-01,KRW,South Korean Won,1455.25,false
+2025-04-01,NZD,New Zealand Dollar,1.7485,false
+2025-04-01,ZAR,South African Rand,18.52,false
+2025-05-01,USD,US Dollar,1.000000,true
+2025-05-01,EUR,Euro,0.8857,true
+2025-05-01,GBP,British Pound,0.7531,true
+2025-05-01,JPY,Japanese Yen,143.25,true
+2025-05-01,CAD,Canadian Dollar,1.3895,true
+2025-05-01,AUD,Australian Dollar,1.5285,true
+2025-05-01,CHF,Swiss Franc,0.8645,true
+2025-05-01,INR,Indian Rupee,84.18,true
+2025-05-01,BRL,Brazilian Real,5.52,false
+2025-05-01,PLN,Polish Zloty,3.85,false
+2025-05-01,SEK,Swedish Krona,10.18,false
+2025-05-01,MXN,Mexican Peso,19.42,false
+2025-05-01,SGD,Singapore Dollar,1.3285,false
+2025-05-01,ILS,Israeli Shekel,3.58,false
+2025-05-01,UAH,Ukrainian Hryvnia,41.25,false
+2025-05-01,ARS,Argentine Peso,1175.00,false
+2025-05-01,CNY,Chinese Yuan,7.18,false
+2025-05-01,KRW,South Korean Won,1385.50,false
+2025-05-01,NZD,New Zealand Dollar,1.6985,false
+2025-05-01,ZAR,South African Rand,18.15,false
+2025-06-01,USD,US Dollar,1.000000,true
+2025-06-01,EUR,Euro,0.8809,true
+2025-06-01,GBP,British Pound,0.7431,true
+2025-06-01,JPY,Japanese Yen,147.52,true
+2025-06-01,CAD,Canadian Dollar,1.3762,true
+2025-06-01,AUD,Australian Dollar,1.5125,true
+2025-06-01,CHF,Swiss Franc,0.8715,true
+2025-06-01,INR,Indian Rupee,83.65,true
+2025-06-01,BRL,Brazilian Real,5.35,false
+2025-06-01,PLN,Polish Zloty,3.78,false
+2025-06-01,SEK,Swedish Krona,10.05,false
+2025-06-01,MXN,Mexican Peso,17.85,false
+2025-06-01,SGD,Singapore Dollar,1.3185,false
+2025-06-01,ILS,Israeli Shekel,3.52,false
+2025-06-01,UAH,Ukrainian Hryvnia,41.05,false
+2025-06-01,ARS,Argentine Peso,1218.75,false
+2025-06-01,CNY,Chinese Yuan,7.12,false
+2025-06-01,KRW,South Korean Won,1368.25,false
+2025-06-01,NZD,New Zealand Dollar,1.6725,false
+2025-06-01,ZAR,South African Rand,17.95,false
+2025-07-01,USD,US Dollar,1.000000,true
+2025-07-01,EUR,Euro,0.8470,true
+2025-07-01,GBP,British Pound,0.7275,true
+2025-07-01,JPY,Japanese Yen,144.85,true
+2025-07-01,CAD,Canadian Dollar,1.3625,true
+2025-07-01,AUD,Australian Dollar,1.4985,true
+2025-07-01,CHF,Swiss Franc,0.8585,true
+2025-07-01,INR,Indian Rupee,83.28,true
+2025-07-01,BRL,Brazilian Real,5.42,false
+2025-07-01,PLN,Polish Zloty,3.72,false
+2025-07-01,SEK,Swedish Krona,9.85,false
+2025-07-01,MXN,Mexican Peso,17.52,false
+2025-07-01,SGD,Singapore Dollar,1.3095,false
+2025-07-01,ILS,Israeli Shekel,3.48,false
+2025-07-01,UAH,Ukrainian Hryvnia,40.85,false
+2025-07-01,ARS,Argentine Peso,1265.50,false
+2025-07-01,CNY,Chinese Yuan,7.08,false
+2025-07-01,KRW,South Korean Won,1352.75,false
+2025-07-01,NZD,New Zealand Dollar,1.6485,false
+2025-07-01,ZAR,South African Rand,17.72,false
+2025-08-01,USD,US Dollar,1.000000,true
+2025-08-01,EUR,Euro,0.8760,true
+2025-08-01,GBP,British Pound,0.7572,true
+2025-08-01,JPY,Japanese Yen,149.18,true
+2025-08-01,CAD,Canadian Dollar,1.3815,true
+2025-08-01,AUD,Australian Dollar,1.5245,true
+2025-08-01,CHF,Swiss Franc,0.8695,true
+2025-08-01,INR,Indian Rupee,83.85,true
+2025-08-01,BRL,Brazilian Real,5.58,false
+2025-08-01,PLN,Polish Zloty,3.82,false
+2025-08-01,SEK,Swedish Krona,10.12,false
+2025-08-01,MXN,Mexican Peso,18.15,false
+2025-08-01,SGD,Singapore Dollar,1.3225,false
+2025-08-01,ILS,Israeli Shekel,3.55,false
+2025-08-01,UAH,Ukrainian Hryvnia,41.18,false
+2025-08-01,ARS,Argentine Peso,1312.25,false
+2025-08-01,CNY,Chinese Yuan,7.15,false
+2025-08-01,KRW,South Korean Won,1378.50,false
+2025-08-01,NZD,New Zealand Dollar,1.6825,false
+2025-08-01,ZAR,South African Rand,18.05,false
+2025-09-01,USD,US Dollar,1.000000,true
+2025-09-01,EUR,Euro,0.8551,true
+2025-09-01,GBP,British Pound,0.7528,true
+2025-09-01,JPY,Japanese Yen,146.25,true
+2025-09-01,CAD,Canadian Dollar,1.3745,true
+2025-09-01,AUD,Australian Dollar,1.5165,true
+2025-09-01,CHF,Swiss Franc,0.8542,true
+2025-09-01,INR,Indian Rupee,83.52,true
+2025-09-01,BRL,Brazilian Real,5.48,false
+2025-09-01,PLN,Polish Zloty,3.75,false
+2025-09-01,SEK,Swedish Krona,9.95,false
+2025-09-01,MXN,Mexican Peso,17.68,false
+2025-09-01,SGD,Singapore Dollar,1.3145,false
+2025-09-01,ILS,Israeli Shekel,3.50,false
+2025-09-01,UAH,Ukrainian Hryvnia,40.95,false
+2025-09-01,ARS,Argentine Peso,1358.75,false
+2025-09-01,CNY,Chinese Yuan,7.10,false
+2025-09-01,KRW,South Korean Won,1362.25,false
+2025-09-01,NZD,New Zealand Dollar,1.6585,false
+2025-09-01,ZAR,South African Rand,17.82,false
+2025-10-01,USD,US Dollar,1.000000,true
+2025-10-01,EUR,Euro,0.8525,true
+2025-10-01,GBP,British Pound,0.7420,true
+2025-10-01,JPY,Japanese Yen,143.75,true
+2025-10-01,CAD,Canadian Dollar,1.3685,true
+2025-10-01,AUD,Australian Dollar,1.5085,true
+2025-10-01,CHF,Swiss Franc,0.8475,true
+2025-10-01,INR,Indian Rupee,83.25,true
+2025-10-01,BRL,Brazilian Real,5.55,false
+2025-10-01,PLN,Polish Zloty,3.78,false
+2025-10-01,SEK,Swedish Krona,9.88,false
+2025-10-01,MXN,Mexican Peso,17.45,false
+2025-10-01,SGD,Singapore Dollar,1.3085,false
+2025-10-01,ILS,Israeli Shekel,3.52,false
+2025-10-01,UAH,Ukrainian Hryvnia,40.75,false
+2025-10-01,ARS,Argentine Peso,1405.50,false
+2025-10-01,CNY,Chinese Yuan,7.06,false
+2025-10-01,KRW,South Korean Won,1348.75,false
+2025-10-01,NZD,New Zealand Dollar,1.6425,false
+2025-10-01,ZAR,South African Rand,17.65,false
+2025-11-01,USD,US Dollar,1.000000,true
+2025-11-01,EUR,Euro,0.8673,true
+2025-11-01,GBP,British Pound,0.7614,true
+2025-11-01,JPY,Japanese Yen,152.45,true
+2025-11-01,CAD,Canadian Dollar,1.3925,true
+2025-11-01,AUD,Australian Dollar,1.5385,true
+2025-11-01,CHF,Swiss Franc,0.8625,true
+2025-11-01,INR,Indian Rupee,84.15,true
+2025-11-01,BRL,Brazilian Real,5.72,false
+2025-11-01,PLN,Polish Zloty,3.88,false
+2025-11-01,SEK,Swedish Krona,10.25,false
+2025-11-01,MXN,Mexican Peso,18.25,false
+2025-11-01,SGD,Singapore Dollar,1.3285,false
+2025-11-01,ILS,Israeli Shekel,3.62,false
+2025-11-01,UAH,Ukrainian Hryvnia,41.35,false
+2025-11-01,ARS,Argentine Peso,1452.25,false
+2025-11-01,CNY,Chinese Yuan,7.18,false
+2025-11-01,KRW,South Korean Won,1395.50,false
+2025-11-01,NZD,New Zealand Dollar,1.6985,false
+2025-11-01,ZAR,South African Rand,18.12,false
+2025-12-01,USD,US Dollar,1.000000,true
+2025-12-01,EUR,Euro,0.8614,true
+2025-12-01,GBP,British Pound,0.7568,true
+2025-12-01,JPY,Japanese Yen,150.85,true
+2025-12-01,CAD,Canadian Dollar,1.4025,true
+2025-12-01,AUD,Australian Dollar,1.5485,true
+2025-12-01,CHF,Swiss Franc,0.8585,true
+2025-12-01,INR,Indian Rupee,84.45,true
+2025-12-01,BRL,Brazilian Real,5.85,false
+2025-12-01,PLN,Polish Zloty,3.92,false
+2025-12-01,SEK,Swedish Krona,10.38,false
+2025-12-01,MXN,Mexican Peso,18.65,false
+2025-12-01,SGD,Singapore Dollar,1.3365,false
+2025-12-01,ILS,Israeli Shekel,3.68,false
+2025-12-01,UAH,Ukrainian Hryvnia,41.65,false
+2025-12-01,ARS,Argentine Peso,1498.75,false
+2025-12-01,CNY,Chinese Yuan,7.22,false
+2025-12-01,KRW,South Korean Won,1418.25,false
+2025-12-01,NZD,New Zealand Dollar,1.7125,false
+2025-12-01,ZAR,South African Rand,18.35,false

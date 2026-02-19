@@ -1,0 +1,1 @@
+select currency_code, currency_name, exchange_rate, ABS(1 - exchange_rate) as rate_difference from exchange_rates  where rate_date = '2025-01-01' and currency_code != 'USD' order by rate_difference DESC;

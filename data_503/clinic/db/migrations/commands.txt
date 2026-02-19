@@ -1,0 +1,8 @@
+# 1. Create your database
+createdb paws_and_claws
+
+# 2. Run all migrations
+goose -dir migrations postgres "postgres://user:password@localhost:5432/paws_and_claws?sslmode=disable" up
+
+# 3. Check status
+goose -dir migrations postgres "postgres://user:password@localhost:5432/paws_and_claws?sslmode=disable" status
