@@ -82,10 +82,14 @@ CREATE INDEX idx_visits_visit_date ON visits (visit_date);
 -- =============================================================================
 -- STEP 3: LOAD STAGING DATA
 -- =============================================================================
--- Loading the CSV data directly via INSERT statements.
--- Alternative: Use \COPY from CSV file (update path as needed):
+-- Option A: Load from CSV file using \COPY (recommended for production)
+-- Uncomment and update the path to your CSV file location:
+--
 -- \COPY staging_vet_data(owner_name, owner_email, owner_phone, pet_name, species, breed, visit_date, reason, cost)
 -- FROM '/path/to/vet_clinic_data.csv' WITH (FORMAT csv, HEADER true);
+--
+-- Option B: Direct INSERT statements (used here for portability)
+-- The data below is equivalent to the CSV contents.
 
 INSERT INTO staging_vet_data (owner_name, owner_email, owner_phone, pet_name, species, breed, visit_date, reason, cost) VALUES
 ('Maria Lopez','maria@email.com','503-555-0101','Luna','Dog','Labrador Retriever','2026-01-15','Checkup',75.00),
@@ -197,13 +201,13 @@ WHERE (s1.owner_phone IS NULL OR s1.owner_phone = '')
   AND s2.owner_phone IS NOT NULL AND s2.owner_phone <> '';
 -- Shows phones that can be recovered from other rows
 
--- Audit 5: Check for exact duplicate rows
-SELECT owner_name, owner_email, pet_name, species, breed, visit_date, reason, cost, COUNT(*) AS cnt
+-- Audit 5: Check for exact duplicate rows (case-insensitive)
+SELECT owner_name, LOWER(owner_email), pet_name, LOWER(species), LOWER(breed), visit_date, reason, cost, COUNT(*) AS cnt
 FROM staging_vet_data
-GROUP BY owner_name, owner_email, pet_name, species, breed, visit_date, reason, cost
+GROUP BY owner_name, LOWER(owner_email), pet_name, LOWER(species), LOWER(breed), visit_date, reason, cost
 HAVING COUNT(*) > 1
 ORDER BY owner_name, pet_name, visit_date;
--- Expected: 2 duplicate rows (Oliver vaccination, Ginger nail trim)
+-- Expected: 2 duplicate visit records (Oliver vaccination on 2026-03-02, Ginger nail trim on 2026-03-10)
 
 -- Audit 6: Check for inconsistent breed casing
 SELECT breed, COUNT(*) AS cnt
@@ -272,9 +276,10 @@ SELECT species, COUNT(*) FROM staging_vet_data GROUP BY species ORDER BY species
 -- Expected: Bird, Cat, Dog, Rabbit, Reptile (5 species, all Title Case)
 
 -- Confirm emails are now lowercase
-SELECT owner_email, COUNT(*) FROM staging_vet_data 
+SELECT COUNT(*) AS emails_not_lowercase 
+FROM staging_vet_data 
 WHERE owner_email <> LOWER(owner_email);
--- Expected: 0 rows
+-- Expected: 0
 
 -- Confirm no more missing phones (that could be recovered)
 SELECT COUNT(*) AS still_missing FROM staging_vet_data WHERE owner_phone IS NULL;
@@ -334,8 +339,8 @@ UNION ALL SELECT 'owners', COUNT(*) FROM owners
 UNION ALL SELECT 'species', COUNT(*) FROM species
 UNION ALL SELECT 'pets', COUNT(*) FROM pets
 UNION ALL SELECT 'visits', COUNT(*) FROM visits;
--- Expected: staging=69, owners=14, species=5, pets=22, visits=69
--- Note: The original data mentions 22 pets, but actual unique pets depends on data
+-- Expected: staging=69, owners=14, species=5, pets=28, visits=69
+-- Note: 14 owners × 2 pets each = 28 pets; 71 original rows - 2 duplicates = 69 visits
 
 -- Verify revenue totals match
 SELECT 
