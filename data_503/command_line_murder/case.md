@@ -1,7 +1,5 @@
 # Command Line Murder Mystery — Solution
 
-## Overview
-
 The clues and the interview are what created the suspect list. The interview confirmed that the suspect was male, not the female from the coffee shop. With this information, we were able to focus on finding a male who is 6ft or taller and a member of the four places in the clues.
 
 ---
@@ -60,41 +58,16 @@ grep -B 1 "Height: [6-8]'" vehicles \
 
 At this point, the suspect list is short, so we can check the names one at a time. I opted to use an environment variable, but putting the names in a list and looping through would be better.
 
-### Remaining suspects
-
-```
-Mike Bostock
-Nikolaus Milatz
-Matt Waite
-Brian Boyer
-Augustin Lozano
-Jeremy Bowers
-```
-
 ### Verification attempts
 
 ```bash
 export SUSPECT='Mike Bostock'     # ❌ SORRY, TRY AGAIN.
 export SUSPECT='Nikolaus Milatz'  # ❌ SORRY, TRY AGAIN.
-export SUSPECT='Matt Waite'      # ❌ SORRY, TRY AGAIN.
-export SUSPECT='Brian Boyer'     # ❌ SORRY, TRY AGAIN.
-export SUSPECT='Augustin Lozano' # ❌ SORRY, TRY AGAIN.
-export SUSPECT='Jeremy Bowers'   # ✅ CORRECT! GREAT WORK, GUMSHOE.
+export SUSPECT='Matt Waite'       # ❌ SORRY, TRY AGAIN.
+export SUSPECT='Brian Boyer'      # ❌ SORRY, TRY AGAIN.
+export SUSPECT='Augustin Lozano'  # ❌ SORRY, TRY AGAIN.
+export SUSPECT='Jeremy Bowers'    # ✅ CORRECT! GREAT WORK, GUMSHOE.
 ```
-
-### Verification command
-
-```bash
-echo $SUSPECT \
-  | $(command -v md5 || command -v md5sum) \
-  | grep -qif /dev/stdin encoded \
-  && echo "CORRECT! GREAT WORK, GUMSHOE." \
-  || echo "SORRY, TRY AGAIN."
-```
-
----
-
-## 🔎 Answer: **Jeremy Bowers**
 
 ## Proof:
 
