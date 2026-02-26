@@ -98,6 +98,7 @@ echo $SUSPECT \
 
 ## Proof:
 
+```bash
 dave@Davids-MacBook-Pro-3 command-line-mystery % echo $SUSPECT | $(command -v md5 || command -v md5sum) | grep -qif /dev/stdin encoded && echo CORRECT\! GREAT WORK, GUMSHOE. || echo SORRY, TRY AGAIN.
 CORRECT! GREAT WORK, GUMSHOE.
-
+```
