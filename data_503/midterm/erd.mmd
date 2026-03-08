@@ -45,3 +45,16 @@ erDiagram
     products ||--o{ order_items : "appears in"
     categories ||--o{ products : "classifies"
     suppliers ||--o{ products : "supplies"
+
+%% Crow's Foot Notation Key
+%% ||  = exactly one (mandatory)
+%% o|  = zero or one (optional)
+%% |{  = one or more (mandatory many)
+%% o{  = zero or more (optional many)
+%%
+%% Read left-to-right across the line:
+%%   customers ||--o{ orders
+%%   "one customer has zero or more orders"
+%%
+%%   orders ||--|{ order_items
+%%   "one order has one or more order items"

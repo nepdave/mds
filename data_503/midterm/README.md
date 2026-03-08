@@ -122,6 +122,17 @@ erDiagram
     suppliers ||--o{ products : "supplies"
 ```
 
+**Crow's Foot Notation Key:**
+
+| Symbol | Meaning |
+|--------|---------|
+| `\|\|` | Exactly one (mandatory) |
+| `o\|` | Zero or one (optional) |
+| `\|{` | One or more (mandatory many) |
+| `o{` | Zero or more (optional many) |
+
+Reading the diagram: `customers ||--o{ orders` means "one customer has zero or more orders." `orders ||--|{ order_items` means "one order has one or more order items."
+
 Walking through the relationships:
 
 - A **customer places many orders**, but each order belongs to one customer.
