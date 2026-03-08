@@ -1,4 +1,4 @@
-# Midterm Video Script
+# Midterm Project
 
 ## 1. Data Inspection and Planning (2–3 min)
 
