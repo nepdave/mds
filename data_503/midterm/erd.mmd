@@ -1,0 +1,47 @@
+erDiagram
+    customers {
+        int customer_id PK
+        varchar name
+        varchar email
+        varchar city
+        varchar state
+    }
+
+    suppliers {
+        int supplier_id PK
+        varchar name
+        varchar country
+    }
+
+    categories {
+        int category_id PK
+        varchar name
+    }
+
+    products {
+        int product_id PK
+        varchar name
+        numeric price
+        int category_id FK
+        int supplier_id FK
+    }
+
+    orders {
+        int order_id PK
+        date order_date
+        int customer_id FK
+    }
+
+    order_items {
+        int order_item_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+        numeric unit_price
+    }
+
+    customers ||--o{ orders : "places"
+    orders ||--|{ order_items : "contains"
+    products ||--o{ order_items : "appears in"
+    categories ||--o{ products : "classifies"
+    suppliers ||--o{ products : "supplies"

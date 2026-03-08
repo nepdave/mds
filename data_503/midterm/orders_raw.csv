@@ -1,0 +1,24 @@
+order_id,order_date,customer_name,customer_email,customer_city,customer_state,product_name,product_category,product_price,quantity,supplier_name,supplier_country
+1001,2025-03-15,Alice Johnson,alice@example.com,Portland,OR,Wireless Mouse,Electronics,29.99,2,TechSupply Co.,USA
+1001,2025-03-15,Alice Johnson,alice@example.com,Portland,OR,USB-C Hub,Electronics,49.99,1,TechSupply Co.,USA
+1002,2025-03-16,Bob Martinez,bob.m@example.com,Seattle,WA,Standing Desk,Furniture,399.99,1,OfficePro Ltd.,Canada
+1002,2025-03-16,Bob Martinez,bob.m@example.com,Seattle,WA,Desk Lamp,Furniture,34.99,2,OfficePro Ltd.,Canada
+1002,2025-03-16,Bob Martinez,bob.m@example.com,Seattle,WA,Wireless Mouse,Electronics,29.99,1,TechSupply Co.,USA
+1003,2025-03-17,Claire Nguyen,claire.n@example.com,San Francisco,CA,Mechanical Keyboard,Electronics,89.99,1,KeyBoard Masters,Japan
+1003,2025-03-17,Claire Nguyen,claire.n@example.com,San Francisco,CA,Monitor Stand,Furniture,59.99,1,OfficePro Ltd.,Canada
+1004,2025-03-18,David Park,dpark@example.com,Portland,OR,Notebook Pack,Office Supplies,12.99,5,PaperTrail Inc.,USA
+1004,2025-03-18,David Park,dpark@example.com,Portland,OR,Ballpoint Pens,Office Supplies,7.49,3,PaperTrail Inc.,USA
+1004,2025-03-18,David Park,dpark@example.com,Portland,OR,Wireless Mouse,Electronics,29.99,1,TechSupply Co.,USA
+1005,2025-03-19,Alice Johnson,alice@example.com,Portland,OR,Mechanical Keyboard,Electronics,89.99,1,KeyBoard Masters,Japan
+1005,2025-03-19,Alice Johnson,alice@example.com,Portland,OR,Desk Lamp,Furniture,34.99,1,OfficePro Ltd.,Canada
+1006,2025-03-20,Fatima Al-Rashid,fatima.r@example.com,Eugene,OR,Standing Desk,Furniture,399.99,1,OfficePro Ltd.,Canada
+1006,2025-03-20,Fatima Al-Rashid,fatima.r@example.com,Eugene,OR,USB-C Hub,Electronics,49.99,2,TechSupply Co.,USA
+1006,2025-03-20,Fatima Al-Rashid,fatima.r@example.com,Eugene,OR,Notebook Pack,Office Supplies,12.99,3,PaperTrail Inc.,USA
+1007,2025-03-21,Bob Martinez,bob.m@example.com,Seattle,WA,Mechanical Keyboard,Electronics,89.99,1,KeyBoard Masters,Japan
+1008,2025-03-22,Grace Kim,gkim@example.com,Boise,ID,Monitor Stand,Furniture,59.99,2,OfficePro Ltd.,Canada
+1008,2025-03-22,Grace Kim,gkim@example.com,Boise,ID,Ballpoint Pens,Office Supplies,7.49,4,PaperTrail Inc.,USA
+1009,2025-03-23,Claire Nguyen,claire.n@example.com,San Francisco,CA,Notebook Pack,Office Supplies,12.99,10,PaperTrail Inc.,USA
+1009,2025-03-23,Claire Nguyen,claire.n@example.com,San Francisco,CA,USB-C Hub,Electronics,49.99,1,TechSupply Co.,USA
+1010,2025-03-24,David Park,dpark@example.com,Portland,OR,Standing Desk,Furniture,399.99,1,OfficePro Ltd.,Canada
+1010,2025-03-24,David Park,dpark@example.com,Portland,OR,Desk Lamp,Furniture,34.99,2,OfficePro Ltd.,Canada
+1010,2025-03-24,David Park,dpark@example.com,Portland,OR,Wireless Mouse,Electronics,29.99,1,TechSupply Co.,USA
