@@ -1,76 +1,78 @@
 # Midterm Project
 
-## 1. Data Inspection and Planning (2–3 min)
+## 1. Data Inspection and Planning
 
-Let's start by opening the raw CSV file. This is `orders_raw.csv` — 23 rows and
-12 columns of order data from a small e-commerce business.
+Now, let me be clear about what we're looking at here. We've got a file called
+`orders_raw.csv`. It's a spreadsheet — 23 rows, 12 columns — showing order
+data from a small online store. Every row is one item somebody bought.
 
-Each row represents one line item on an order. The columns are: order_id,
-order_date, customer_name, customer_email, customer_city, customer_state,
-product_name, product_category, product_price, quantity, supplier_name, and
-supplier_country.
+The columns tell us: which order it was, when it happened, who the customer is,
+what they bought, how much it cost, how many they got, and who supplied the
+product. All in one big flat table.
 
-Right away you can see the redundancy. Alice Johnson's name, email, city, and
-state appear on four separate rows — once for every item she's ever ordered.
-The supplier "TechSupply Co., USA" shows up six times because three different
-orders include products from that supplier. "Wireless Mouse, Electronics, 29.99"
-is repeated four times. Order 1002 has Bob Martinez's full info copied across
-three rows just because he bought three items in one order.
+And here's the thing — there's a lot of copy-and-paste going on. Alice
+Johnson's name, email, and address show up four separate times. The supplier
+"TechSupply Co." appears six times. Every time someone orders a Wireless Mouse,
+we're writing down the same product name, same category, same price all over
+again. That's wasteful, and more importantly, it's risky.
 
-This flat structure creates three classic anomalies:
+Let me explain why. There are three problems that come with this kind of
+structure, and folks in the database world call them anomalies:
 
-**Update anomaly.** If Alice Johnson changes her email, we have to find and
-update every row she appears in. Miss one and the data is inconsistent — we'd
-have two different emails for the same person.
+**The update problem.** Let's say Alice changes her email. We'd have to go find
+every single row with her name and update it. If we miss even one, now we've got
+two different emails for the same person. That's not a minor headache — that's
+bad data.
 
-**Insert anomaly.** Say we get a new supplier or a new product. We can't add it
-to this table without fabricating a fake order, because every row requires an
-order_id, a customer, and a quantity. The table conflates what a product *is*
-with what was *ordered*.
+**The insert problem.** Say we sign a new supplier, but nobody's placed an order
+with them yet. We can't even add them to this table, because every row requires
+an order ID, a customer, a quantity. The table mixes up "what exists" with "what
+was purchased," and that makes it impossible to record one without the other.
 
-**Delete anomaly.** If we delete order 1007 — Bob's solo keyboard order — we
-might lose the fact that KeyBoard Masters is a supplier we work with, depending
-on the dataset. In general, deleting the last order that references a supplier
-or product would erase that entity from our data entirely.
+**The delete problem.** If we remove order 1007 — that's Bob's keyboard
+order — we might accidentally erase our record that KeyBoard Masters is a
+supplier we work with. Deleting an order shouldn't wipe out a supplier's
+existence, but in a flat table, it can.
 
-The root cause of all three anomalies is the same: we've jammed multiple
-independent concepts — customers, products, suppliers, orders — into a single
-flat table. Normalization fixes this by giving each concept its own table.
+The root cause is straightforward. We crammed four or five different ideas —
+customers, products, suppliers, orders — into one table. The fix is to give
+each idea its own table. That's what normalization does.
 
 ---
 
-## 2. Normalization and ERD (3–4 min)
+## 2. Normalization and ERD
 
-Let's walk through normalizing this data to Third Normal Form.
+So let's talk about how we organize this data properly. The standard we're
+aiming for is called Third Normal Form, or 3NF. Think of it as a set of rules
+that make sure every piece of information lives in exactly one place.
 
-**First Normal Form.** 1NF requires atomic values in every cell and no repeating
-groups. Our CSV already satisfies this — each cell holds one value and each row
-is distinct.
+**First Normal Form (1NF).** Each cell in the table holds one value — not a
+list, not a group of things. Our CSV already passes this test. One value per
+cell, every row is different. We're good.
 
-**Second Normal Form.** 2NF eliminates partial dependencies — every non-key
-attribute must depend on the *entire* primary key, not just part of it. In the
-flat table, the implicit key for a row is something like (order_id,
-product_name). But customer_name and customer_email don't depend on
-product_name at all — they only depend on order_id. That's a partial
-dependency. To fix it, we pull customer info and order info into their own
-tables.
+**Second Normal Form (2NF).** Every piece of information has to depend on the
+*whole* key that identifies a row, not just part of it. In our flat table, a
+row is identified by a combination of order ID and product name. But the
+customer's name and email? Those only depend on the order, not the product.
+They don't care what product was bought. That's a partial dependency, and we
+fix it by pulling customer info into its own table.
 
-**Third Normal Form.** 3NF removes transitive dependencies — no non-key column
-should depend on the primary key *through* another non-key column. In the flat
-table, product_category depends on product_name, which depends on the row's
-key. That's transitive. Similarly, supplier_country depends on supplier_name.
-We fix these by extracting categories and suppliers into their own tables.
+**Third Normal Form (3NF).** No column should depend on the key *through*
+another column. In our flat table, the product category depends on the product
+name, which depends on the row's key. That's a chain — an indirect dependency.
+Same thing with the supplier's country depending on the supplier's name. We fix
+this by giving categories and suppliers their own tables.
 
-After normalization, we end up with six entities:
+After that process, we end up with six clean tables:
 
-1. **customers** — customer_id, name, email, city, state
-2. **suppliers** — supplier_id, name, country
-3. **categories** — category_id, name
-4. **products** — product_id, name, price, category_id, supplier_id
-5. **orders** — order_id, order_date, customer_id
-6. **order_items** — order_item_id, order_id, product_id, quantity, unit_price
+1. **customers** — who our buyers are (ID, name, email, city, state)
+2. **suppliers** — who we source products from (ID, name, country)
+3. **categories** — the types of products we sell (ID, name)
+4. **products** — what we sell (ID, name, price, which category, which supplier)
+5. **orders** — each purchase event (ID, date, which customer)
+6. **order_items** — the individual lines on each order (ID, which order, which product, how many, price at time of sale)
 
-Here is the Entity-Relationship Diagram:
+Here's the Entity-Relationship Diagram that shows how these tables connect:
 
 ```mermaid
 erDiagram
@@ -120,46 +122,83 @@ erDiagram
     products ||--o{ order_items : "appears in"
     categories ||--o{ products : "classifies"
     suppliers ||--o{ products : "supplies"
+
+    NOTATION_KEY {
+        string exactly_one "||"
+        string zero_or_one "o|"
+        string one_or_more "|{"
+        string zero_or_more "o{"
+    }
 ```
 
-**Crow's Foot Notation Key:**
+Now, those lines between the boxes — the ones with the little symbols on the
+ends — that's called crow's foot notation. Each end of a line tells you two
+things: is the relationship **mandatory or optional**, and is it **one or many**?
 
-| Symbol | Meaning |
-|--------|---------|
-| `\|\|` | Exactly one (mandatory) |
-| `o\|` | Zero or one (optional) |
-| `\|{` | One or more (mandatory many) |
-| `o{` | Zero or more (optional many) |
+Here's the key. Each symbol is made of two parts — an **inner** mark (closest
+to the line) that tells you the minimum, and an **outer** mark (closest to the
+entity box) that tells you the maximum:
 
-Reading the diagram: `customers ||--o{ orders` means "one customer has zero or more orders." `orders ||--|{ order_items` means "one order has one or more order items."
+| Symbol | Inner mark | Outer mark | Minimum | Maximum | Plain English |
+|--------|-----------|------------|---------|---------|---------------|
+| `\|\|` | `\|` (one) | `\|` (one) | 1 | 1 | **Exactly one.** Required, and only one. |
+| `o\|` | `o` (zero) | `\|` (one) | 0 | 1 | **Zero or one.** Optional, but at most one. |
+| `\|{` | `\|` (one) | `{` (many) | 1 | Many | **One or more.** Required, and can be many. |
+| `o{` | `o` (zero) | `{` (many) | 0 | Many | **Zero or more.** Optional, and can be many. |
 
-Walking through the relationships:
+The three building blocks are:
+- `|` — a single vertical bar means **one** (and exactly one)
+- `o` — a circle means **zero** (it's optional)
+- `{` — a crow's foot (the fork shape) means **many**
 
-- A **customer places many orders**, but each order belongs to one customer.
-  One-to-many.
-- An **order contains one or more order items**. Each order item belongs to
-  exactly one order. One-to-many.
-- A **product appears in many order items** across different orders. Each order
-  item references one product. One-to-many.
-- A **category classifies many products**, but each product belongs to one
-  category. One-to-many.
-- A **supplier supplies many products**, but each product comes from one
-  supplier. One-to-many.
+To read a relationship line, look at **each end separately**. The symbol at
+each end describes that side. For example:
 
-One design choice worth calling out: order_items has its own `unit_price` column
-separate from the product's current `price`. This captures the price at the time
-of sale. If a product's price changes later, historical orders stay accurate.
+`customers ||--o{ orders`
 
-This schema is actually BCNF — Boyce-Codd Normal Form — which is strictly
-stronger than 3NF. In every table, every functional dependency has a superkey
-on the left side. No non-key column determines any other non-key column.
+- The left end (`||`) is on the customers side — **exactly one** customer.
+- The right end (`o{`) is on the orders side — **zero or more** orders.
+- Read together: "Each order belongs to exactly one customer. Each customer
+  has zero or more orders."
+
+`orders ||--|{ order_items`
+
+- The left end (`||`) is on the orders side — **exactly one** order.
+- The right end (`|{`) is on the order_items side — **one or more** items.
+- Read together: "Each order item belongs to exactly one order. Each order
+  has one or more items." That `|{` instead of `o{` matters — an order with
+  zero items isn't really an order, so the minimum is one, not zero.
+
+Let me walk through all five relationships:
+
+- A **customer** can place many orders, but each order belongs to exactly one
+  customer.
+- An **order** contains one or more line items. Each line item belongs to
+  exactly one order.
+- A **product** can appear on many different orders. Each line item refers to
+  exactly one product.
+- A **category** groups many products together, but each product sits in
+  exactly one category.
+- A **supplier** provides many products, but each product comes from exactly
+  one supplier.
+
+One thing worth noting: the order_items table has its own `unit_price` column,
+separate from the product's current price. That's intentional. If we raise the
+price of a Wireless Mouse next month, we don't want last month's orders to
+suddenly show the new price. The order item captures what the customer actually
+paid.
+
+This schema actually meets an even stricter standard called BCNF — Boyce-Codd
+Normal Form. In plain terms, that means every dependency in every table points
+back to that table's primary key. There are no shortcuts, no back doors. It's
+as clean as it gets.
 
 ---
 
-## 3. Table Design and Constraints (2–3 min)
+## 3. Table Design and Constraints
 
-Here are the CREATE TABLE statements from the goose migration file. Let me walk
-through the data types and constraints.
+Now let's look at the actual SQL that creates these tables. This lives in a
+migration file that gets run automatically when we start the program.
 
 ```sql
 CREATE TABLE customers (
@@ -171,12 +210,12 @@ CREATE TABLE customers (
 );
 ```
 
-`SERIAL` auto-generates an incrementing integer for the primary key.
-`VARCHAR(100)` for name and city gives reasonable room without being wasteful.
-`CHAR(2)` for state since US state codes are always exactly two characters.
-Email is `UNIQUE` because it's the natural key — no two customers share one.
-Everything is `NOT NULL` because a customer without a name or city is
-incomplete data.
+Let me break this down. `SERIAL PRIMARY KEY` means the database generates a
+unique number for each customer automatically — 1, 2, 3, and so on. We never
+have to pick one ourselves. `VARCHAR(100)` means "text up to 100 characters
+long." `CHAR(2)` for state means exactly two characters — like OR, WA, CA.
+`NOT NULL` means the field can't be left blank. And `UNIQUE` on email means no
+two customers can share the same email address.
 
 ```sql
 CREATE TABLE suppliers (
@@ -186,8 +225,8 @@ CREATE TABLE suppliers (
 );
 ```
 
-Supplier name is `UNIQUE` — it's how we deduplicate during ingestion. Same
-pattern: serial PK, everything NOT NULL.
+Same pattern here. Each supplier gets an auto-generated ID. The name is marked
+`UNIQUE` so we don't accidentally create the same supplier twice.
 
 ```sql
 CREATE TABLE categories (
@@ -196,7 +235,8 @@ CREATE TABLE categories (
 );
 ```
 
-Simple lookup table. `UNIQUE` on name prevents duplicate categories.
+A simple lookup table. Electronics, Furniture, Office Supplies — each one
+appears once and only once.
 
 ```sql
 CREATE TABLE products (
@@ -208,11 +248,12 @@ CREATE TABLE products (
 );
 ```
 
-`NUMERIC(10,2)` stores exact decimal values for money — no floating-point
-rounding issues. The `CHECK (price > 0)` constraint prevents nonsensical
-zero or negative prices at the database level. The two foreign keys enforce
-referential integrity — you can't assign a product to a category or supplier
-that doesn't exist.
+A couple new things here. `NUMERIC(10,2)` stores dollar amounts precisely — no
+rounding errors that you'd get with regular decimal numbers. `CHECK (price > 0)`
+tells the database to reject any product with a zero or negative price.
+`REFERENCES` creates a foreign key — a link to another table. The database
+won't let you assign a product to a category that doesn't exist. It keeps
+everything honest.
 
 ```sql
 CREATE TABLE orders (
@@ -222,9 +263,9 @@ CREATE TABLE orders (
 );
 ```
 
-Here order_id is a plain `INT` — not SERIAL — because we're preserving the
-original order IDs from the CSV (1001–1010). The foreign key to customers
-ensures every order is tied to a real customer.
+Notice `order_id` is just `INT`, not `SERIAL`. That's because we're keeping the
+original order numbers from the CSV — 1001 through 1010. The foreign key to
+customers makes sure every order is tied to a real person.
 
 ```sql
 CREATE TABLE order_items (
@@ -237,94 +278,88 @@ CREATE TABLE order_items (
 );
 ```
 
-This is the junction table that ties orders to products. The `UNIQUE`
-constraint on (order_id, product_id) prevents duplicate line items — you
-can't have the same product listed twice on the same order. Both `quantity`
-and `unit_price` have `CHECK` constraints ensuring positive values.
+This is the table that ties everything together. It connects orders to products.
+The `UNIQUE` constraint on the combination of order_id and product_id means you
+can't list the same product twice on the same order. Both quantity and
+unit_price have `CHECK` constraints — no zeros, no negatives.
 
-The migration also includes a `goose Down` section that drops all tables in
-reverse dependency order, so we can cleanly roll back if needed.
-
----
-
-## 4. Data Ingestion Process (2–3 min)
-
-For ingestion I wrote a Go program using the standard library's `encoding/csv`
-package and `database/sql` with the `lib/pq` PostgreSQL driver.
-
-The strategy has three steps: migrate, parse, and load.
-
-**Step one: migrate.** The program runs goose migrations on startup. This
-creates all six tables with their constraints if they don't already exist. This
-means the ingest program is self-contained — you don't need to run a separate
-migration step.
-
-**Step two: parse the CSV.** The program reads `orders_raw.csv` using Go's
-`csv.Reader`, skips the header row, and parses each row into a typed struct.
-Prices are parsed as floats, quantities as ints. If any value is malformed the
-program stops with a clear error message rather than inserting bad data.
-
-**Step three: load into normalized tables.** This is where the denormalized
-data gets split into the six tables. The program iterates through all 23 rows
-inside a single database transaction. For each row it inserts entities in
-dependency order:
-
-1. Suppliers first — no foreign key dependencies
-2. Categories — also no dependencies
-3. Products — depends on suppliers and categories
-4. Customers — no dependencies
-5. Orders — depends on customers
-6. Order items — depends on orders and products
-
-To avoid duplicate inserts, the program maintains in-memory maps. For example,
-a map from customer email to customer_id. When it encounters Alice Johnson's
-email for the second time, it skips the customer insert and reuses the existing
-ID. Same pattern for suppliers, categories, and products.
-
-Each insert uses `RETURNING` to get back the auto-generated primary key, which
-is then cached in the map for use by dependent inserts.
-
-The entire load runs in one transaction. If anything fails — a constraint
-violation, a bad foreign key — the whole thing rolls back cleanly. No partial
-data.
-
-No special data cleaning was needed for this dataset. The CSV was well-formed:
-consistent formatting, no nulls, no encoding issues. In a production scenario
-you'd want to add trimming of whitespace, email validation, and handling of
-missing values — but this data didn't require it.
-
-Running the program prints two lines: "read 23 rows from CSV" and "ingestion
-complete."
+The migration file also has a "down" section that removes all the tables in the
+right order if we ever need to start over.
 
 ---
 
-## 5. Sample Queries and Results (2–3 min)
+## 4. Data Ingestion Process
 
-I have a second Go program that runs three queries against the normalized
-database.
+So we've got a clean schema. Now we need to actually move the data from that
+CSV file into our six tables. We wrote a Go program to do this, and the
+strategy is straightforward: migrate, parse, and load.
 
-**Query 1: Reconstruct the original dataset.** This five-way JOIN across all
-six tables reproduces the original flat CSV. Order_items joins to orders for the
-date and customer, joins to products for the product info, which joins to
-categories and suppliers. Ordering by order_id and order_item_id gives us the
-rows in the same sequence as the original file. All 23 rows come back with
-matching values. This proves the normalization was lossless — we didn't lose
-any information by splitting the data apart.
+**Step one: migrate.** When the program starts, it runs the migration file
+automatically. That creates all six tables if they don't already exist. You
+don't need to set up the database by hand — the program handles it.
 
-**Query 2: Total revenue per customer.** This aggregation groups by customer
-and sums `unit_price * quantity` for each line item. The results show David Park
-leading at $617.37 across 2 orders and 13 items — that standing desk at $399.99
-does the heavy lifting. Bob Martinez is close behind at $589.95. Grace Kim
-spent the least at $149.94 with a single order. This kind of query is exactly
-what normalization enables cleanly — you're not at risk of double-counting a
-customer because their info was duplicated across rows.
+**Step two: parse the CSV.** The program opens `orders_raw.csv`, skips the
+header row, and reads each line into a structured format. It converts prices
+to numbers, quantities to whole numbers. If anything looks wrong — a price
+that isn't a number, a quantity that doesn't make sense — the program stops
+and tells you exactly what the problem is. We'd rather catch bad data early
+than put garbage in the database.
 
-**Query 3: Oregon customers and their purchases.** This filtered query pulls
-all order line items for customers in Oregon — state equals 'OR'. Three
-customers come back: Alice Johnson and David Park in Portland, and Fatima
-Al-Rashid in Eugene. Between them they have 13 line items across 5 orders. You
-can see the product mix — David Park's order 1010 includes a standing desk,
-two desk lamps, and a wireless mouse. This is the kind of geographic analysis
-you'd do for regional sales reporting or targeted marketing. The normalized
-schema makes it straightforward: filter on one column in the customers table
-and the JOINs pull in everything else.
+**Step three: load the data.** This is where the flat CSV gets separated into
+the six normalized tables. The program wraps everything in a single
+transaction — think of it as an all-or-nothing operation. Either every row
+gets inserted correctly, or nothing does. No half-finished state.
+
+For each row in the CSV, the program inserts things in the right order:
+
+1. Suppliers first — they don't depend on anything else
+2. Categories — also independent
+3. Products — these need a category and supplier to already exist
+4. Customers — independent
+5. Orders — these need a customer to already exist
+6. Order items — these need both an order and a product
+
+To handle the duplicates in the CSV — remember, Alice Johnson appears four
+times — the program keeps a lookup table in memory. The first time it sees
+Alice's email, it inserts her and remembers her ID. The second time, it skips
+the insert and reuses the ID it already has. Same approach for suppliers,
+categories, and products.
+
+No special data cleaning was needed here. The CSV was well-formed — consistent
+formatting, no missing values, no encoding issues. In a real-world scenario,
+you'd want to trim whitespace, validate emails, and handle missing data. But
+this dataset was clean.
+
+The program prints two lines when it's done: "read 23 rows from CSV" and
+"ingestion complete."
+
+---
+
+## 5. Sample Queries and Results
+
+Now here's where we see the payoff. We've got a second Go program that runs
+three queries against our normalized database.
+
+**Query 1: Reconstruct the original dataset.** This is the proof that our
+normalization didn't lose anything. We join all six tables back together —
+order_items connects to orders for the date and customer, connects to products
+for the product info, which connects to categories and suppliers. All 23 rows
+come back, matching the original CSV exactly. We took the data apart and put
+it back together, and nothing was lost.
+
+**Query 2: Total revenue per customer.** This groups all the line items by
+customer and adds up what each person spent (unit price times quantity). David
+Park leads at $617.37 across 2 orders — that standing desk at $399.99 does
+the heavy lifting. Bob Martinez is close behind at $589.95. Grace Kim spent
+the least at $149.94 from a single order. This kind of question is exactly what
+normalization makes easy. Since each customer lives in one place, there's no
+risk of counting someone twice because their info was repeated across rows.
+
+**Query 3: Oregon customers and their purchases.** This filters down to
+customers where the state is OR. Three people come back: Alice Johnson and
+David Park in Portland, and Fatima Al-Rashid in Eugene. Between them, 13 line
+items across 5 orders. You can see the product mix — David's order 1010 has a
+standing desk, two desk lamps, and a wireless mouse. This is the kind of
+geographic breakdown you'd use for regional sales reports. With normalized
+data, it's straightforward — filter on one column in the customers table and
+the joins bring in everything else.

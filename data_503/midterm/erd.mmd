@@ -47,8 +47,13 @@ erDiagram
     suppliers ||--o{ products : "supplies"
 
     NOTATION_KEY {
-        string exactly_one "||"
-        string zero_or_one "o|"
-        string one_or_more "|{"
-        string zero_or_more "o{"
+        string _______________ "Symbol = Inner + Outer"
+        string bar_bar________ "|| = exactly one (required, only one)"
+        string circle_bar_____ "o| = zero or one (optional, at most one)"
+        string bar_crow_______ "|{ = one or more (required, can be many)"
+        string circle_crow____ "o{ = zero or more (optional, can be many)"
+        string _____________x_ "--- Building Blocks ---"
+        string bar____________ "| = one"
+        string circle_________ "o = zero (optional)"
+        string crow_foot______ "{ = many"
     }
